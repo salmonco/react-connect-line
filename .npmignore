@@ -1,0 +1,7 @@
+node_modules/
+public/
+src/
+tsconfig.json
+tsconfig.node.json
+.eslintrc.cjs
+index.html
