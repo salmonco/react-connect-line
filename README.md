@@ -1,27 +1,82 @@
-# React + TypeScript + Vite
+# react-connect-line
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+You can match your react components by connecting the dots with lines.
 
-Currently, two official plugins are available:
+## Screenshot
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img width="626" alt="스크린샷" src="https://github.com/salmonco/react-connect-line/assets/86469788/9065c942-7d6c-409a-b53f-f9c010756ab6">
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+npm install react-connect-line
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Usage
+
+```typescript
+import { useState, useEffect } from "react";
+import { ConnectLine, ItemsProps } from 'react-connect-line';
+
+function App() {
+  const [items, setItems] = useState<ItemsProps[]>([]);
+  const [isCorrectMatch, setIsCorrectMatch] = useState(false);
+
+  useEffect(() => {
+    const items = [
+      {
+        source: { text: "one" },
+        target: { text: "1" },
+      },
+      {
+        source: { text: "two" },
+        target: { text: "2" },
+      },
+      {
+        source: { text: "three" },
+        target: { text: "3" },
+      },
+    ];
+
+    setItems(items);
+  }, []);
+
+  console.log(isCorrectMatch);
+
+  return (
+    <ConnectLine
+      items={items}
+      isLayoutUpAndDown={true}
+      setIsCorrectMatch={setIsCorrectMatch}
+      containerSize={800}
+      lineColor="orange"
+      lineWidth={10}
+      dotColor="orange"
+      dotSize={46}
+      fontSize={24}
+      imageSize={100}
+    />
+  );
+}
+
+export default App;
+```
+
+## Props
+
+|Prop|Description|Type|Default|
+|---|---|---|---|
+|items|Contents to connect with a line|ItemsProps[]|required|
+|isLayoutUpAndDown|Whether the source and target are placed top and bottom|boolean|false|
+|setIsCorrectMatch|A function to store information about whether the source and target are correctly paired|React.Dispatch<React.SetStateAction<boolean>>|undefined|
+|containerSize|Size of the ConnectLine component (height if the layout is top or bottom, width if the layout is on both sides)|number|100%|
+|lineColor|Color of the line connecting the dots|string|black|
+|lineWidth|Width of the line connecting the dots|number|10|
+|dotColor|Color of the dot|string|black|
+|dotSize|Size of the dot (width and height are the same)|number|46|
+|fontSize|Size of the item's text|number|50|
+|imageSize|Size of the item's image|number|300|
+
+## Contributing
+
+Contributions are always welcome!
