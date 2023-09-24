@@ -71,8 +71,9 @@ const Image = styled.img<{
     width: 100px;
   }
 `;
-const Text = styled.span<{ $fontSize: number }>`
+const Text = styled.span<{ $color: string; $fontSize: number }>`
   font-size: ${(props) => props.$fontSize}px;
+  color: ${(props) => props.$color};
   font-family: "Pretendard-Bold";
   pointer-events: none;
   @media screen and (min-width: 768px) and (max-height: 1079px) {

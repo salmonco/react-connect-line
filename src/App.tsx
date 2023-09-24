@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import { useState } from "react";
 import { ConnectLine, ItemsProps } from "./lib/index";
 
 function App() {
@@ -17,6 +16,10 @@ function App() {
         source: { text: "two" },
         target: { text: "2" },
       },
+      {
+        source: { text: "three" },
+        target: { text: "3" },
+      },
     ];
 
     setItems(items);
@@ -27,15 +30,14 @@ function App() {
   return (
     <ConnectLine
       items={items}
-      // isLayoutUpAndDown={true}
+      isLayoutUpAndDown={true}
       setIsCorrectMatch={setIsCorrectMatch}
-      containerSize={800}
+      containerSize={500}
       lineColor="orange"
       lineWidth={10}
       dotColor="orange"
       dotSize={46}
       fontSize={24}
-      imageSize={150}
     />
   );
 }

@@ -19,6 +19,7 @@ type MatchContainerProps = {
   lineWidth?: number;
   dotColor?: string;
   dotSize?: number;
+  textColor?: string;
   fontSize?: number;
   imageSize?: number;
 };
@@ -32,6 +33,7 @@ export default function MatchContainer({
   lineWidth,
   dotColor,
   dotSize,
+  textColor,
   fontSize,
   imageSize,
 }: MatchContainerProps) {
@@ -81,7 +83,12 @@ export default function MatchContainer({
               <Style.Image alt="" src={v.imageURL} $size={imageSize ?? 300} />
             )}
             {v.text && (
-              <Style.Text $fontSize={fontSize ?? 50}>{v.text}</Style.Text>
+              <Style.Text
+                $color={textColor ?? `black`}
+                $fontSize={fontSize ?? 50}
+              >
+                {v.text}
+              </Style.Text>
             )}
             <Style.Dot $color={dotColor ?? `black`} $size={dotSize ?? 46} />
           </Style.ItemContainer>
@@ -111,7 +118,12 @@ export default function MatchContainer({
               <Style.Image alt="" src={v.imageURL} $size={imageSize ?? 300} />
             )}
             {v.text && (
-              <Style.Text $fontSize={fontSize ?? 50}>{v.text}</Style.Text>
+              <Style.Text
+                $color={textColor ?? `black`}
+                $fontSize={fontSize ?? 50}
+              >
+                {v.text}
+              </Style.Text>
             )}
           </Style.ItemContainer>
         ))}
