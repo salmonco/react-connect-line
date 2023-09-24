@@ -46,7 +46,6 @@ function App() {
   return (
     <ConnectLine
       items={items}
-      isLayoutUpAndDown={true}
       setIsCorrectMatch={setIsCorrectMatch}
       containerSize={800}
       lineColor="orange"
@@ -54,7 +53,6 @@ function App() {
       dotColor="orange"
       dotSize={46}
       fontSize={24}
-      imageSize={100}
     />
   );
 }
@@ -74,9 +72,14 @@ export default App;
 |lineWidth|Width of the line connecting the dots|number|10|
 |dotColor|Color of the dot|string|black|
 |dotSize|Size of the dot (width and height are the same)|number|46|
+|textColor|Color of the item's text|string|black|
 |fontSize|Size of the item's text|number|50|
 |imageSize|Size of the item's image|number|300|
 
 ## Contributing
 
 Contributions are always welcome!
+
+## License
+
+MIT
