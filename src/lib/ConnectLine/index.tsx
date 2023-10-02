@@ -44,6 +44,7 @@ export default function MatchContainer({
     lines,
     sourceRefs,
     targetRefs,
+    handleImageLoad,
     dragStartHandler,
     dragHandler,
     dragEndHandler,
@@ -80,7 +81,12 @@ export default function MatchContainer({
             $isLayoutUpAndDown={isLayoutUpAndDown ?? false}
           >
             {v.imageURL && (
-              <Style.Image alt="" src={v.imageURL} $size={imageSize ?? 300} />
+              <Style.Image
+                alt=""
+                src={v.imageURL}
+                $size={imageSize ?? 300}
+                onLoad={handleImageLoad}
+              />
             )}
             {v.text && (
               <Style.Text
@@ -115,7 +121,12 @@ export default function MatchContainer({
           >
             <Style.Dot $color={dotColor ?? `black`} $size={dotSize ?? 46} />
             {v.imageURL && (
-              <Style.Image alt="" src={v.imageURL} $size={imageSize ?? 300} />
+              <Style.Image
+                alt=""
+                src={v.imageURL}
+                $size={imageSize ?? 300}
+                onLoad={handleImageLoad}
+              />
             )}
             {v.text && (
               <Style.Text

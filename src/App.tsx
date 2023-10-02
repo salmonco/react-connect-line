@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     const items = [
       {
-        source: { text: "one" },
+        source: { text: "one", imageURL: "/src/assets/react.svg" },
         target: { text: "1" },
       },
       {
@@ -18,7 +18,7 @@ function App() {
       },
       {
         source: { text: "three" },
-        target: { text: "3" },
+        target: { text: "3", imageURL: "/src/assets/react.svg" },
       },
     ];
 
@@ -32,12 +32,13 @@ function App() {
       items={items}
       isLayoutUpAndDown={true}
       setIsCorrectMatch={setIsCorrectMatch}
-      containerSize={500}
+      containerSize={700}
       lineColor="orange"
       lineWidth={10}
       dotColor="orange"
       dotSize={46}
       fontSize={24}
+      imageSize={50}
     />
   );
 }

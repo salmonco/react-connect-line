@@ -63,8 +63,8 @@ export const useConnectLine = (
     }
   }, [lines, isCorrect, setIsCorrectMatch]);
 
-  useEffect(() => {
-    const setPosition = (
+  const setPosition = useCallback(
+    (
       refs: React.MutableRefObject<HTMLDivElement[] | null[]>,
       setState: React.Dispatch<React.SetStateAction<CoordInfo[]>>
     ) => {
@@ -85,11 +85,73 @@ export const useConnectLine = (
           ]);
         }
       }
-    };
+    },
+    [itemCount]
+  );
 
+  const getMaxSize = (
+    els1: HTMLDivElement[] | null[],
+    els2: HTMLDivElement[] | null[]
+  ) => {
+    let maxWidth = 0;
+    let maxHeight = 0;
+
+    for (const el of els1) {
+      if (el) {
+        maxWidth = Math.max(maxWidth, el.getBoundingClientRect().width);
+        maxHeight = Math.max(maxHeight, el.getBoundingClientRect().height);
+      }
+    }
+    for (const el of els2) {
+      if (el) {
+        maxWidth = Math.max(maxWidth, el.getBoundingClientRect().width);
+        maxHeight = Math.max(maxHeight, el.getBoundingClientRect().height);
+      }
+    }
+    return [maxWidth, maxHeight];
+  };
+
+  const setMaxSize = (
+    els: HTMLDivElement[] | null[],
+    maxWidth: number,
+    maxHeight: number
+  ) => {
+    for (const el of els) {
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const deltaX = maxWidth - rect.width;
+        const deltaY = maxHeight - rect.height;
+
+        if (isLayoutUpAndDown) {
+          el.style.width = `${maxWidth}px`;
+          el.style.left = `${rect.left - deltaX / 2}px`;
+          el.style.right = `${rect.right + deltaX / 2}px`;
+        } else {
+          el.style.height = `${maxHeight}px`;
+          el.style.top = `${rect.top - deltaY / 2}px`;
+          el.style.bottom = `${rect.bottom + deltaY / 2}px`;
+        }
+      }
+    }
+  };
+
+  const handleImageLoad = () => {
+    const [maxWidth, maxHeight] = getMaxSize(
+      sourceRefs.current,
+      targetRefs.current
+    );
+
+    setMaxSize(sourceRefs.current, maxWidth, maxHeight);
+    setMaxSize(targetRefs.current, maxWidth, maxHeight);
+    setBoxs([]);
     setPosition(sourceRefs, setBoxs);
     setPosition(targetRefs, setBoxs);
-  }, [itemCount]);
+  };
+
+  useEffect(() => {
+    setPosition(sourceRefs, setBoxs);
+    setPosition(targetRefs, setBoxs);
+  }, [itemCount, setPosition]);
 
   const createLine = (
     startCoord: { x: number; y: number },
@@ -265,6 +327,7 @@ export const useConnectLine = (
     lines,
     sourceRefs,
     targetRefs,
+    handleImageLoad,
     dragStartHandler,
     dragHandler,
     dragEndHandler,
