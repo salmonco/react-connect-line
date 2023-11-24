@@ -77,7 +77,7 @@ const Text = styled.span<{ $color: string; $fontSize: number }>`
   font-family: "Pretendard-Bold";
   pointer-events: none;
   @media screen and (min-width: 768px) and (max-height: 1079px) {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
   @media screen and (max-width: 767px) {
     font-size: 2rem;
